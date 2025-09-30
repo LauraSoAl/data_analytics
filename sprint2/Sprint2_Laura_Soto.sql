@@ -8,50 +8,50 @@ FROM transaction;
 
 -- EXERCICI 2
 -- Llistat dels països que estan generant vendes.
-SELECT country, ROUND (SUM(transaction.amount), 2) as TotalVentas
+SELECT country, ROUND (SUM(transaction.amount), 2) AS TotalVentas
 FROM company
 JOIN transaction
-ON company.id = transaction.company_id
-WHERE declined = '1'
+ON company.id = company_id
+WHERE declined = '0'
 GROUP BY country;
 
 -- Des de quants països es generen les vendes.
-SELECT ROUND (SUM(transaction.amount), 2) as TotalVentas, COUNT(distinct company.country) as CantidadPaises
+SELECT ROUND (SUM(transaction.amount), 2) AS TotalVentas, COUNT(distinct company.country) AS CantidadPaises
 FROM transaction
 INNER JOIN company
-ON transaction.company_id = company.id
-WHERE declined = '1';
+ON company_id = company.id
+WHERE declined = '0';
 
 -- Identifica la companyia amb la mitjana més gran de vendes
-SELECT company.company_name, ROUND (AVG(amount), 2) as MediaDeVentas
+SELECT company_name, ROUND (AVG(amount), 2) AS MediaDeVentas
 FROM company
 INNER JOIN transaction
-ON company.id = transaction.company_id
-WHERE declined = '1'
-GROUP BY company.company_name
+ON company.id = company_id
+WHERE declined = '0'
+GROUP BY company_name
 ORDER BY MediaDeVentas DESC
 LIMIT 1;
 
 -- EXERCICI 3
 -- Mostra totes les transaccions realitzades per empreses d'Alemanya.
-SELECT transaction.id, company.country
+SELECT transaction.id, country
 FROM transaction, company
-WHERE transaction.company_id = company.id AND transaction.company_id IN (SELECT id
-																		FROM company
-																		WHERE country = 'Germany');
+WHERE company_id = company.id AND company_id IN (SELECT id
+												FROM company
+												WHERE country = 'Germany');
                                 
 -- Llista les empreses que han realitzat transaccions per un amount superior a la mitjana de totes 
 -- les transaccions. 
-SELECT transaction.amount, company.company_name
+SELECT amount, company_name
 FROM transaction, company
-WHERE transaction.company_id = company.id AND amount > (SELECT AVG(amount)
-														FROM transaction);
+WHERE company_id = company.id AND amount > (SELECT AVG(amount)
+											FROM transaction);
 
 -- Eliminaran del sistema les empreses que no tenen transaccions registrades, entrega el llistat 
 -- d'aquestes empreses.
-SELECT company.company_name
+SELECT company_name
 FROM company
-WHERE company.id NOT IN (SELECT transaction.company_id
+WHERE company.id NOT IN (SELECT company_id
 			                FROM transaction);
                
                
@@ -61,8 +61,8 @@ WHERE company.id NOT IN (SELECT transaction.company_id
 -- Mostra la data de cada transacció juntament amb el total de les vendes.
 SELECT DATE_FORMAT(timestamp,'%Y-%m-%d') as Fecha, ROUND (SUM(amount), 2) as Ventas
 FROM transaction
-WHERE declined = '1'
-GROUP BY DATE_FORMAT(timestamp,'%Y-%m-%d')
+WHERE declined = '0'
+GROUP BY Fecha
 ORDER BY Ventas DESC
 LIMIT 5;
 
@@ -71,8 +71,8 @@ LIMIT 5;
 SELECT country, ROUND (AVG(amount), 2) as MediaVentas
 FROM company
 JOIN transaction
-ON company.id = transaction.company_id
-WHERE declined = '1'
+ON company.id = company_id
+WHERE declined = '0'
 GROUP BY country
 ORDER BY MediaVentas DESC;
 
@@ -82,22 +82,22 @@ ORDER BY MediaVentas DESC;
 -- transaccions realitzades per empreses que estan situades en el mateix país que aquesta companyia.
 
 -- Mostra el llistat aplicant JOIN i subconsultes.
-SELECT transaction.id, company.country
+SELECT transaction.id, country
 FROM transaction
 JOIN company
-ON transaction.company_id = company.id
+ON company_id = company.id
 WHERE country IN (SELECT country
                   FROM company
                   WHERE country = 'United Kingdom') ;
 
 
 -- Mostra el llistat aplicant solament subconsultes.
-SELECT transaction.id, company.country
+SELECT transaction.id, country
 FROM transaction, company
-WHERE transaction.company_id = company.id 
-AND transaction.company_id IN (SELECT id
-							   FROM company
-							   WHERE country = 'United Kingdom');
+WHERE company_id = company.id 
+AND company_id IN (SELECT id
+				   FROM company
+				   WHERE country = 'United Kingdom');
 
 -- NIVELL 3
 -- EXERCICI 1
@@ -105,10 +105,10 @@ AND transaction.company_id IN (SELECT id
 -- i en alguna d'aquestes dates: 29 d'abril del 2015, 20 de juliol del 2018 i 13 de març del 2024. Ordena els resultats de major a menor 
 -- quantitat.
 
-SELECT company_name, phone, country, DATE_FORMAT(timestamp,'%Y-%m-%d') as Fecha, ROUND (amount, 2)
+SELECT company_name, phone, country, DATE_FORMAT(timestamp,'%Y-%m-%d') AS Fecha, ROUND (amount, 2)
 FROM company
 JOIN transaction
-ON company.id = transaction.company_id
+ON company.id = company_id
 WHERE amount BETWEEN 350 AND 400
 AND DATE_FORMAT(timestamp,'%Y-%m-%d') IN ('2015-04-29','2018-07-20','2024-03-13')
 ORDER BY amount DESC;
@@ -125,7 +125,7 @@ CASE
 END AS CantidadTransacciones
 FROM company
 JOIN  transaction
-ON company.id = transaction.company_id
+ON company.id = company_id
 GROUP BY company.id;
 
 
