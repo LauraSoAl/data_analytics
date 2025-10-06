@@ -14,6 +14,18 @@
         expiring_date VARCHAR(8)
     );
     
+    CREATE TABLE transactions (
+    id INT PRIMARY KEY,
+    card_id INT,
+    business_id INT,
+    user_id INT,
+    timestamp DATETIME,
+    amount DECIMAL(10,2),
+    declined TINYINT,
+    lat FLOAT,
+    longitude FLOAT,
+    product_ids VARCHAR(255)  -- lo cargamos tal cual del CSV
+);
     -- Creamos relación de la clave foranea con primary Key
     ALTER TABLE transaction
     ADD CONSTRAINT fk_transaccion_tarjeta
@@ -34,19 +46,19 @@ FROM credit_card
 WHERE id='CcU-2938';
 
 -- EXERCICI 3
--- En la taula "transaction" ingressa un nou usuari 
+-- En la taula "transaction" ingressa un nou usuari
 
 -- Para poder crear el usuario en transaction, primero tenemos que crear el usuario en la tabla company. 
 INSERT INTO company (id, company_name, phone, email, country, website)
 VALUES ('b-9999', NULL, NULL, NULL, NULL, NULL);
 
--- Posteriormente, creamos el nuevo usuario con los datos aportados en la tabla transaction
-INSERT INTO transaction (id,credit_card_id,company_id, user_id, lat, longitude, timestamp, amount, declined)
-VALUES ('108B1D1D-5B23-A76C-55EF-C568E49A99DD','CcU-9999', 'b-9999', 9999, 829.999, -117.999, NULL, 111.11, 0);
-
 -- Creamos también el registro en la tabla credit_card 
 INSERT INTO credit_card (id, iban, pan, pin, cvv, expiring_date)
 VALUES ('CcU-9999', NULL, NULL, NULL, NULL, NULL);
+
+-- Por úlitmo, creamos el nuevo usuario con los datos aportados en la tabla transaction
+INSERT INTO transaction (id,credit_card_id,company_id, user_id, lat, longitude, timestamp, amount, declined)
+VALUES ('108B1D1D-5B23-A76C-55EF-C568E49A99DD','CcU-9999', 'b-9999', 9999, 829.999, -117.999, NULL, 111.11, 0);
 
 
 -- EXERCICI 4
