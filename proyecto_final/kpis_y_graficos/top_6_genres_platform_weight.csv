@@ -1,0 +1,24 @@
+platform,genre_group,total_titles,platform_total,percentage_weight
+Amazon Prime,Action & Adventure,1728,10342,16.708567008315605
+Amazon Prime,Classics & International,355,10342,3.4326049120092823
+Amazon Prime,Comedy,2099,10342,20.295880874105592
+Amazon Prime,Documentary & News,993,10342,9.601624444014698
+Amazon Prime,Drama & Romance,3999,10342,38.667569135563724
+Amazon Prime,Kids & Family,1168,10342,11.293753625991105
+Disney+,Action & Adventure,454,2424,18.72937293729373
+Disney+,Comedy,551,2424,22.73102310231023
+Disney+,Documentary & News,369,2424,15.222772277227723
+Disney+,Drama & Romance,298,2424,12.293729372937294
+Disney+,Kids & Family,752,2424,31.02310231023102
+Hulu,Action & Adventure,637,3590,17.74373259052925
+Hulu,Classics & International,333,3590,9.275766016713092
+Hulu,Comedy,667,3590,18.579387186629525
+Hulu,Documentary & News,604,3590,16.824512534818943
+Hulu,Drama & Romance,1003,3590,27.938718662952645
+Hulu,Kids & Family,346,3590,9.637883008356546
+Netflix,Action & Adventure,1028,14309,7.18428960793906
+Netflix,Classics & International,4431,14309,30.96652456495912
+Netflix,Comedy,2620,14309,18.310154448249353
+Netflix,Documentary & News,1268,14309,8.861555664267245
+Netflix,Drama & Romance,3805,14309,26.59165560136977
+Netflix,Kids & Family,1157,14309,8.085820113215458
